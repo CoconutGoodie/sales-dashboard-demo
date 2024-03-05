@@ -3,8 +3,6 @@ import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
 
 const fsRoutes = import.meta.glob("../routes/**/*.tsx", { import: "default" });
 
-console.log(fsRoutes);
-
 function filePathsToTree(rootPath: string, filePaths: string[]) {
   interface FileNode {
     name: string;
@@ -49,12 +47,13 @@ function filePathsToTree(rootPath: string, filePaths: string[]) {
     }
 
     currentNode.isFile = true;
+    delete currentNode.children;
   }
 
   return root;
 }
 
-console.log(filePathsToTree("../routes", Object.keys(fsRoutes)));
+const fsTree = filePathsToTree("../routes", Object.keys(fsRoutes));
 
 async function buildRouteTree(
   fsPath: string = "../routes",
