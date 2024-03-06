@@ -1,16 +1,17 @@
+import { ActivityWidget } from "@src/components/ActivityWidget";
 import styles from "./page.module.scss";
 
 const HomePage = () => {
   return (
     <div className={styles.page}>
-      <div style={{}} />
-      <div style={{}} />
-      <div style={{}} />
-      <div style={{}} />
-      <div style={{ gridRow: "span 2" }} />
-      <div style={{}} />
-      <div style={{}} />
-      <div style={{}} />
+      <ActivityWidget />
+      <div style={{ background: "#95b4ff" }} />
+      <div style={{ background: "#95b4ff" }} />
+      <div style={{ background: "#95b4ff" }} />
+      <div style={{ gridRow: "span 2", background: "#95b4ff" }} />
+      <div style={{ background: "#95b4ff" }} />
+      <div style={{ background: "#95b4ff" }} />
+      <div style={{ background: "#95b4ff" }} />
     </div>
   );
 };
