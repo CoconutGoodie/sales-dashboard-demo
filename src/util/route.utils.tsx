@@ -1,6 +1,11 @@
 import { ReactUtils } from "@src/util/react.utils";
 import { ComponentType } from "react";
-import { ActionFunction, LoaderFunction, RouteObject } from "react-router-dom";
+import {
+  ActionFunction,
+  LoaderFunction,
+  Navigate,
+  RouteObject,
+} from "react-router-dom";
 
 export namespace RouteUtils {
   export type Resolver = () => Promise<Record<string, unknown>>;
@@ -82,111 +87,155 @@ export namespace RouteUtils {
     return typeof v === "function";
   }
 
-  export async function buildRouteTree(
+  export async function buildRouteObject(
     resolverMap: ResolverMap,
     folderTree: FileNode,
-    routePath: string
-  ): Promise<RouteObject[]> {
-    const tap = <T, R>(value: T, tapper: (value: T) => R) => {
-      if (!value) return;
-      return tapper(value);
-    };
-
+    routePath: string = "/"
+  ): Promise<RouteObject> {
     const resolve = (path: string) => {
-      return tap(resolverMap[path], (resolver) => resolver());
+      const resolver = resolverMap[path];
+      if (!resolver) return null;
+      return resolver();
     };
-
-    // const childRoutes2 = Promise.all(folderTree.children);
-
-    // const childrenRoute = await Promise.all(
-    //   folderTree.children?.map((childTree) =>
-    //     buildRouteTree(childTree, childTree.name)
-    //   ) ?? []
-    // );
 
     const layoutPath = `${folderTree.absolutePath}/layout.tsx`;
     const pagePath = `${folderTree.absolutePath}/page.tsx`;
     const errorPath = `${folderTree.absolutePath}/error.tsx`;
     const loaderPath = `${folderTree.absolutePath}/loader.tsx`;
     const actionPath = `${folderTree.absolutePath}/action.tsx`;
+    const notfoundPath = `${folderTree.absolutePath}/notfound.tsx`;
 
-    return [
-      {
-        path: routePath,
-        lazy: tap(resolverMap[layoutPath], (layoutResolver) => {
-          return async () => {
-            const module = await layoutResolver();
-            const LayoutComponent = module.default;
+    const lazyPage = async () => {
+      const pageModule = await resolve(pagePath);
+      const PageComponent = pageModule?.default;
 
-            if (!ReactUtils.isComponent(LayoutComponent)) {
-              throw new Error(
-                `${layoutPath} should export a React Component as default`
+      if (!ReactUtils.isComponent(PageComponent)) {
+        throw new Error(
+          `${pagePath} should export a React Component as default`
+        );
+      }
+
+      const loaderModule = await resolve(loaderPath);
+      const LoaderFunc = loaderModule?.default;
+
+      if (loaderModule && !isLoaderFunction(LoaderFunc)) {
+        throw new Error(
+          `${loaderPath} should export a LoaderFunction as default`
+        );
+      }
+
+      const actionModule = await resolve(actionPath);
+      const ActionFunc = actionModule?.default;
+
+      if (actionModule && !isActionFunction(ActionFunc)) {
+        throw new Error(
+          `${actionPath} should export a ActionFunction as default`
+        );
+      }
+
+      return {
+        loader: LoaderFunc as LoaderFunction,
+        action: ActionFunc as ActionFunction,
+        Component: PageComponent,
+      };
+    };
+
+    const lazyLayout = async () => {
+      const layoutModule = await resolve(layoutPath);
+      const LayoutComponent = layoutModule?.default;
+
+      if (!ReactUtils.isComponent(LayoutComponent)) {
+        throw new Error(
+          `${layoutPath} should export a React Component as default`
+        );
+      }
+
+      const errorModule = await resolve(errorPath);
+      const ErrorComponent = errorModule?.default;
+
+      if (errorModule && !ReactUtils.isComponent(ErrorComponent)) {
+        throw new Error(
+          `${errorPath} should export a React Component as default`
+        );
+      }
+
+      return {
+        hasErrorBoundary: !!ErrorComponent,
+        ErrorBoundary: ErrorComponent as ComponentType,
+        Component: LayoutComponent,
+      };
+    };
+
+    const lazyNotFound = async () => {
+      const notfoundModule = await resolve(notfoundPath);
+      const NotFoundComponent = notfoundModule?.default;
+
+      if (notfoundModule && !ReactUtils.isComponent(NotFoundComponent)) {
+        throw new Error(
+          `${notfoundPath} should export a React Component as default`
+        );
+      }
+
+      return {
+        Component: NotFoundComponent as ComponentType,
+      };
+    };
+
+    const children: RouteObject[] = [];
+
+    if (resolverMap[pagePath]) {
+      children.push({
+        index: true,
+        lazy: resolverMap[pagePath] ? lazyPage : undefined,
+      });
+    } else if (resolverMap[notfoundPath]) {
+      children.push({
+        index: true,
+        lazy: resolverMap[notfoundPath] ? lazyNotFound : undefined,
+      });
+    } else {
+      children.push({
+        index: true,
+        // TODO: Might need to render nearest NotFound instead
+        Component: () => <Navigate to={"/"} />,
+      });
+    }
+
+    if (folderTree.children) {
+      children.push(
+        ...(await Promise.all(
+          folderTree.children
+            .filter((childNode) => !childNode.isFile)
+            .map((childFolderTree) => {
+              return buildRouteObject(
+                resolverMap,
+                childFolderTree,
+                childFolderTree.name
               );
-            }
+            })
+        ))
+      );
+    }
 
-            const errorModule = await resolve(errorPath);
-            const ErrorComponent = errorModule?.default;
+    if (resolverMap[notfoundPath]) {
+      children.push({
+        path: "*",
+        lazy: resolverMap[notfoundPath] ? lazyNotFound : undefined,
+      });
+    }
 
-            if (errorModule && !ReactUtils.isComponent(ErrorComponent)) {
-              throw new Error(
-                `${errorPath} should export a React Component as default`
-              );
-            }
+    const routeObject = {
+      path: routePath.match(/\[.*\]/)
+        ? routePath.replace("[", ":").replace("]", "")
+        : routePath,
+      lazy: resolverMap[layoutPath] ? lazyLayout : undefined,
+      children,
+    };
 
-            return {
-              hasErrorBoundary: !!ErrorComponent,
-              ErrorBoundary: ErrorComponent as ComponentType,
-              Component: LayoutComponent,
-            };
-          };
-        }),
-        children: [
-          {
-            index: true,
-            lazy: tap(resolverMap[pagePath], (pageResolver) => {
-              return async () => {
-                const module = await pageResolver();
-                const PageComponent = module.default;
+    if (!routeObject.lazy) {
+      delete routeObject.lazy;
+    }
 
-                if (!ReactUtils.isComponent(PageComponent)) {
-                  throw new Error(
-                    `${pagePath} should export a React Component as default`
-                  );
-                }
-
-                const loaderModule = await resolve(loaderPath);
-                const LoaderFunc = loaderModule?.default;
-
-                if (loaderModule && !isLoaderFunction(LoaderFunc)) {
-                  throw new Error(
-                    `${loaderPath} should export a LoaderFunction as default`
-                  );
-                }
-
-                const actionModule = await resolve(actionPath);
-                const ActionFunc = actionModule?.default;
-
-                if (actionModule && !isActionFunction(ActionFunc)) {
-                  throw new Error(
-                    `${actionPath} should export a ActionFunction as default`
-                  );
-                }
-
-                return {
-                  loader: LoaderFunc as LoaderFunction,
-                  action: ActionFunc as ActionFunction,
-                  Component: PageComponent,
-                };
-              };
-            }),
-          },
-          // ...childrenRoute,
-          // ...
-          // ...(routePath === ""
-          //   ? await buildRouteTree(fsPath + "/home", "home")
-          //   : []),
-        ],
-      },
-    ];
+    return routeObject;
   }
 }

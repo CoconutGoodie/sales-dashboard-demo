@@ -1,5 +1,5 @@
 import { RouteUtils } from "@src/util/route.utils";
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 
 const routeResolvers = import.meta.glob(
   "../routes/**/*.tsx"
@@ -10,12 +10,11 @@ const routesFolderTree = RouteUtils.filePathsToTree(
   "../routes"
 );
 
-const routeTree = await RouteUtils.buildRouteTree(
+const rootRouteObject = await RouteUtils.buildRouteObject(
   routeResolvers,
-  routesFolderTree,
-  ""
+  routesFolderTree
 );
 
-console.log(routeTree);
+console.log(rootRouteObject);
 
-export const router = createBrowserRouter(routeTree);
+export const router = createBrowserRouter([rootRouteObject]);
