@@ -23,7 +23,7 @@ const NavButton = (props: PropsWithChildren<{ to: string }>) => {
       onClick={(e) => e.preventDefault()}
     >
       {props.children}
-      {active && <marker />}
+      {active && <div className={styles.marker} />}
     </NavLink>
   );
 };

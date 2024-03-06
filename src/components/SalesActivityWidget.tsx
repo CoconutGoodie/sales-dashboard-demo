@@ -90,11 +90,16 @@ export const SalesActivityWidget = () => {
         <span>{percentageDifference.toFixed(0)}%</span>
       </h3>
 
-      <svg>
+      <svg className={styles.chart}>
         <g transform="translate(0,300) scale(1,-1)">
           <path
+            className={styles.stroke}
             d={generatePath(vertices)}
             stroke={`url(#${strokeColorId})`}
+          />
+          <path
+            className={styles.fill}
+            d={generatePath(vertices)}
             fill={`url(#${fillColorId})`}
           />
         </g>
@@ -108,19 +113,19 @@ export const SalesActivityWidget = () => {
             y2="206"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#BFD1FF" />
-            <stop offset="1" stop-color="#4676F0" />
+            <stop stopColor="#BFD1FF" />
+            <stop offset="1" stopColor="#4676F0" />
           </linearGradient>
           <linearGradient
             id={fillColorId}
             x1={400 - 203}
-            y1={vertices.reduce((max, v) => Math.max(max, v[1]), -Infinity)}
+            y1={vertices.reduce((max, v) => Math.max(max, v[1]), 0)}
             x2={400 - 188}
             y2={200 - 186}
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#0F4EF0" />
-            <stop offset="1" stop-color="#3167F2" />
+            <stop stopColor="#0F4EF0" />
+            <stop offset="1" stopColor="#3167F2" />
           </linearGradient>
         </defs>
       </svg>
