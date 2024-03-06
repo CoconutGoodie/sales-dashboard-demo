@@ -197,7 +197,7 @@ export namespace RouteUtils {
       children.push({
         index: true,
         // TODO: Might need to render nearest NotFound instead
-        Component: () => <Navigate to={"/"} />,
+        Component: () => <Navigate to={"/"} replace />,
       });
     }
 

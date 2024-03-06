@@ -1,5 +1,5 @@
 import { RouteUtils } from "@src/util/route.utils";
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 const routeResolvers = import.meta.glob(
   "../routes/**/*.tsx"
