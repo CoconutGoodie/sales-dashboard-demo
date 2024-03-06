@@ -2,9 +2,9 @@ import { ComponentRef, useEffect, useRef, useState } from "react";
 import { MathUtils } from "@src/util/math.utils";
 import CircleArrowUp02 from "@src/assets/icons/hugeicons/circle-arrow-up02.svg?component";
 
-import styles from "./ActivityWidget.module.scss";
+import styles from "./SalesActivityWidget.module.scss";
 
-export const ActivityWidget = () => {
+export const SalesActivityWidget = () => {
   // const pseudoData = [100, 200, 150, 400, 600, 500, 800, 900];
   const pseudoData = Array.from({ length: 8 }).map(
     (_, i) => 50 + Math.random() * 100 * (i + 1)
