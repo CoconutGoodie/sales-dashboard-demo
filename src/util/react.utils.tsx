@@ -9,7 +9,9 @@ export namespace ReactUtils {
     return typeof v === "function" && !!v.prototype.isReactComponent;
   }
 
-  export function isComponent(v: unknown): v is ComponentType {
+  export function isComponent<T extends ComponentType = ComponentType>(
+    v: unknown
+  ): v is T {
     return isFunctionalComponent(v) || isClassComponent(v);
   }
 }

@@ -1,10 +1,9 @@
 import { RouteUtils } from "@src/util/route.utils";
 import { createBrowserRouter } from "react-router-dom";
 
-const routeResolvers: RouteUtils.ResolverMap = import.meta.glob(
-  "../routes/**/*.tsx",
-  { import: "default" }
-);
+const routeResolvers = import.meta.glob(
+  "../routes/**/*.tsx"
+) as RouteUtils.ResolverMap;
 
 const routesFolderTree = RouteUtils.filePathsToTree(
   Object.keys(routeResolvers),
