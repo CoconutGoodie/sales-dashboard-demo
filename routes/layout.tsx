@@ -1,12 +1,12 @@
-import { PropsWithChildren } from "react";
+import { Outlet } from "react-router";
 
 import styles from "./layout.module.scss";
 
-const RootLayout = (props: PropsWithChildren) => {
+const RootLayout = () => {
   return (
     <div className={styles.root}>
       <h1>Root Layout</h1>
-      {props.children}
+      <Outlet />
     </div>
   );
 };
