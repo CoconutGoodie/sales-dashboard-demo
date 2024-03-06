@@ -93,14 +93,14 @@ export const SalesActivityWidget = () => {
       <svg className={styles.chart}>
         <g transform="translate(0,300) scale(1,-1)">
           <path
-            className={styles.stroke}
-            d={generatePath(vertices)}
-            stroke={`url(#${strokeColorId})`}
-          />
-          <path
             className={styles.fill}
             d={generatePath(vertices)}
             fill={`url(#${fillColorId})`}
+          />
+          <path
+            className={styles.stroke}
+            d={generatePath(vertices)}
+            stroke={`url(#${strokeColorId})`}
           />
         </g>
 
