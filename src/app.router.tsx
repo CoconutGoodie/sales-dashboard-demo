@@ -15,6 +15,4 @@ const rootRouteObject = await RouteUtils.buildRouteObject(
   routesFolderTree
 );
 
-console.log(rootRouteObject);
-
 export const router = createBrowserRouter([rootRouteObject]);
