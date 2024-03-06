@@ -20,6 +20,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.22.2
     version: 6.22.2(react-dom@18.2.0)(react@18.2.0)
+  usehooks-ts:
+    specifier: ^2.16.0
+    version: 2.16.0(react@18.2.0)
   vite-plugin-react-rich-svg:
     specifier: ^1.1.1
     version: 1.1.1(@types/node@20.11.24)(sass@1.71.1)(typescript@5.2.2)
@@ -2291,6 +2294,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: false
+
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
@@ -3001,6 +3008,16 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
+
+  /usehooks-ts@2.16.0(react@18.2.0):
+    resolution: {integrity: sha512-bez95WqYujxp6hFdM/CpRDiVPirZPxlMzOH2QB8yopoKQMXpscyZoxOjpEdaxvV+CAWUDSM62cWnqHE0E/MZ7w==}
+    engines: {node: '>=16.15.0'}
+    peerDependencies:
+      react: ^16.8.0  || ^17 || ^18
+    dependencies:
+      lodash.debounce: 4.0.8
+      react: 18.2.0
+    dev: false
 
   /vite-plugin-react-rich-svg@1.1.1(@types/node@20.11.24)(sass@1.71.1)(typescript@5.2.2):
     resolution: {integrity: sha512-i9HEaFxoVbY1yedTO4x/7vZxSIdSnHUOJXNi3GdbF2Nv3DIJk0TpobvPXAxsPNs0AxDBACb26GmnchFeeo6ZcQ==}

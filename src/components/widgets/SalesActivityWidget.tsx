@@ -1,13 +1,7 @@
-import {
-  ComponentRef,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { MathUtils } from "@src/util/math.utils";
 import CircleArrowUp02 from "@src/assets/icons/hugeicons/circle-arrow-up02.svg?component";
+import { MathUtils } from "@src/util/math.utils";
+import { ComponentRef, useId, useMemo, useRef } from "react";
+import { useResizeObserver } from "usehooks-ts";
 
 import styles from "./SalesActivityWidget.module.scss";
 
@@ -19,7 +13,10 @@ export const SalesActivityWidget = () => {
   }, []);
 
   const rootRef = useRef<ComponentRef<"div">>(null);
-  const [boundingBox, setBoundingBox] = useState<DOMRect>();
+  const { width: rootWidth = 0, height: rootHeight = 0 } = useResizeObserver({
+    ref: rootRef,
+    box: "border-box",
+  });
 
   const strokeColorId = useId();
   const fillColorId = useId();
@@ -31,27 +28,16 @@ export const SalesActivityWidget = () => {
   const total = pseudoData.reduce((sum, data) => sum + data, 0);
 
   const vertices = useMemo<MathUtils.Vector2[]>(() => {
-    if (!boundingBox) return [];
-
     const maxValue = pseudoData.reduce(
       (max, data) => Math.max(max, data),
       -Infinity
     );
 
     return pseudoData.map((data, index) => [
-      MathUtils.mapRange(
-        index,
-        [0, pseudoData.length - 1],
-        [0, boundingBox.width]
-      ),
-      MathUtils.mapRange(data, [0, maxValue], [0, boundingBox.height * 0.6]),
+      MathUtils.mapRange(index, [0, pseudoData.length - 1], [0, rootWidth]),
+      MathUtils.mapRange(data, [0, maxValue], [0, rootHeight * 0.6]),
     ]);
-  }, [boundingBox]);
-
-  useEffect(() => {
-    if (!rootRef.current) return;
-    setBoundingBox(rootRef.current.getBoundingClientRect());
-  }, []);
+  }, [rootWidth, rootHeight]);
 
   function generatePath(points: MathUtils.Vector2[]) {
     if (points.length < 2) {
