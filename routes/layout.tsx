@@ -19,6 +19,8 @@ const NavButton = (props: PropsWithChildren<{ to: string }>) => {
     <NavLink
       to={props.to}
       className={clsx(styles.navbutton, active && styles["navbutton--active"])}
+      // Prevented for demo purposes
+      onClick={(e) => e.preventDefault()}
     >
       {props.children}
       {active && <marker />}
@@ -44,8 +46,9 @@ const RootLayout = () => {
         </nav>
       </aside>
 
+      <header className={styles.header}></header>
+
       <div className={styles.page}>
-        <header className={styles.header}>Header</header>
         <Outlet />
       </div>
     </main>
