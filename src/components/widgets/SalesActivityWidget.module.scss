@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 12px;
   background: #3167f2;
+  color: #fff;
   overflow: hidden;
 
   & > h1 {
@@ -53,7 +54,7 @@
 
   .fill {
     opacity: 0;
-    animation: fill 500ms linear 1s forwards; 
+    animation: fill 500ms linear 1s forwards;
   }
 
   @keyframes dash {

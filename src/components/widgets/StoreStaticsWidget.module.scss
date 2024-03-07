@@ -1,0 +1,82 @@
+.widget {
+  position: relative;
+  box-sizing: border-box;
+  padding: 30px;
+  background: #d0ddfd;
+
+  & > h1 {
+    color: #3167f2;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    text-align: start;
+  }
+}
+
+.map {
+  margin: 0 auto;
+  position: relative;
+  width: 290px;
+  height: 188px;
+
+  .world {
+    color: #f8faff;
+    stroke: currentColor;
+  }
+
+  .dots {
+    position: absolute;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    transform: translate(-10px, -10px);
+    inset: 0;
+
+    & > g {
+      cursor: pointer;
+      fill: #3167f2;
+
+      &:hover {
+        fill: #7a55b8;
+      }
+
+      & > circle {
+        transform: translate(10px, 10px);
+
+        &:nth-child(2) {
+          animation: sonarWave 2s linear infinite;
+
+          @keyframes sonarWave {
+            from {
+              r: 2;
+              opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.info {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  color: #3167f2;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}

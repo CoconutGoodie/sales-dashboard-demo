@@ -11,7 +11,7 @@ export const ExpensesWidget = () => {
     const width = 130;
     const height = 130;
 
-    const radius = 50;
+    const radius = 60;
 
     const x = radius * Math.cos(MathUtils.degToRad(toAngle - fromAngle));
     const y = radius * Math.sin(MathUtils.degToRad(toAngle - fromAngle));
@@ -36,11 +36,13 @@ export const ExpensesWidget = () => {
     <div className={styles.widget}>
       <h1>Expenses</h1>
 
-      <svg ref={svgRef} width={130} height={130}>
-        {generateArc(0, 90, "#3167F2")}
-        {generateArc(105, 200, "#6D98FF")}
-        {generateArc(215, 250, "#E3EAFD")}
-        {generateArc(265, -15, "#B9CDFD")}
+      <svg ref={svgRef} width={140} height={140}>
+        <g transform="translate(5,5)">
+          {generateArc(0, 90, "#3167F2")}
+          {generateArc(102, 200, "#6D98FF")}
+          {generateArc(212, 250, "#E3EAFD")}
+          {generateArc(262, -12, "#B9CDFD")}
+        </g>
       </svg>
 
       <Button className={styles.button}>Details</Button>

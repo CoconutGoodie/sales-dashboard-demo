@@ -18,6 +18,20 @@
   & > svg {
     margin: auto 0;
     align-self: center;
+    animation: zoom-in 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    @keyframes zoom-in {
+      from{
+        scale: 0;
+        rotate: -45deg;
+        opacity: 0;
+      }
+      to{
+        scale: 1;
+        rotate: 0;
+        opacity: 1;
+      }
+    }
   }
 
   .button {
