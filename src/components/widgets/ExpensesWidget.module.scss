@@ -1,0 +1,36 @@
+.widget {
+  box-sizing: border-box;
+  padding: 30px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & > h1 {
+    color: #020617;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    text-align: start;
+  }
+
+  & > svg {
+    margin: auto 0;
+    align-self: center;
+  }
+
+  .button {
+    margin-top: auto;
+    width: 100%;
+  }
+}
+
+.arc {
+  transition: stroke-width 200ms linear;
+
+  &:hover {
+    stroke-width: 12px;
+    cursor: help;
+  }
+}
