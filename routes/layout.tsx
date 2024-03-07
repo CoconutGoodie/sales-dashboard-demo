@@ -17,24 +17,6 @@ import { clsx } from "clsx";
 import styles from "./layout.module.scss";
 import "./style.scss";
 
-const NavButton = (props: PropsWithChildren<{ to: string }>) => {
-  const location = useLocation();
-
-  const active = location.pathname === props.to;
-
-  return (
-    <NavLink
-      to={props.to}
-      className={clsx(styles.navbutton, active && styles["navbutton--active"])}
-      // Prevented for demo purposes
-      onClick={(e) => e.preventDefault()}
-    >
-      {props.children}
-      {active && <div className={styles.marker} />}
-    </NavLink>
-  );
-};
-
 const RootLayout = () => {
   return (
     <main className={styles.root}>
@@ -84,3 +66,23 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
+
+/* -------------------- */
+
+const NavButton = (props: PropsWithChildren<{ to: string }>) => {
+  const location = useLocation();
+
+  const active = location.pathname === props.to;
+
+  return (
+    <NavLink
+      to={props.to}
+      className={clsx(styles.navbutton, active && styles["navbutton--active"])}
+      // Prevented for demo purposes
+      onClick={(e) => e.preventDefault()}
+    >
+      {props.children}
+      {active && <div className={styles.marker} />}
+    </NavLink>
+  );
+};

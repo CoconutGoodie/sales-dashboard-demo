@@ -15,21 +15,27 @@
     text-align: start;
   }
 
-  & > svg {
-    margin: auto 0;
+  .circle {
     align-self: center;
-    animation: zoom-in 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin: auto 0;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
 
-    @keyframes zoom-in {
-      from{
-        scale: 0;
-        rotate: -45deg;
-        opacity: 0;
-      }
-      to{
-        scale: 1;
-        rotate: 0;
-        opacity: 1;
+    & > svg {
+      animation: zoom-in 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
+      @keyframes zoom-in {
+        from{
+          scale: 0;
+          rotate: -45deg;
+          opacity: 0;
+        }
+        to{
+          scale: 1;
+          rotate: 0;
+          opacity: 1;
+        }
       }
     }
   }
@@ -41,7 +47,7 @@
 }
 
 .arc {
-  transition: stroke-width 200ms linear;
+  transition: stroke-width 80ms linear;
 
   &:hover {
     stroke-width: 12px;

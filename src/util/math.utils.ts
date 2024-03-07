@@ -13,4 +13,8 @@ export namespace MathUtils {
   export function degToRad(degree: number) {
     return degree * DEG_TO_RAD;
   }
+
+  export function randomBetween(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 }
