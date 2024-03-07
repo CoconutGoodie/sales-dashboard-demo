@@ -14,6 +14,9 @@
   grid-area: s;
   width: 100px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-inline-end: 1px solid #1f2437;
 
   & > .logo {
@@ -36,10 +39,15 @@
   }
 
   & > .navigation {
-    margin-top: 143px;
+    box-sizing: border-box;
+    margin: auto 0;
+    padding: 20px 0;
+    width: 100%;
     display: flex;
     gap: 34px;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .navbutton {
@@ -62,6 +70,10 @@
       height: 100%;
       border-radius: 2px;
       background: #fff;
+    }
+
+    &:hover {
+      color: #fff;
     }
   }
 }

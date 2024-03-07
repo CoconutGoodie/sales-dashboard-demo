@@ -9,7 +9,7 @@ import { useResizeObserver } from "usehooks-ts";
 import styles from "./StoreStaticsWidget.module.scss";
 
 const worldMapSvgRange = {
-  lat: [85, -30] as MathUtils.Vector2,
+  lat: [102, -35] as MathUtils.Vector2,
   lon: [-175, 200] as MathUtils.Vector2,
 };
 
@@ -19,6 +19,7 @@ export const StoreStaticsWidget = () => {
     [-3, -60],
     [19.11, 30.14],
     [58.52, -121.77],
+    [40.67, 111.6],
   ];
 
   const mapRef = useRef<ComponentRef<"div">>(null);
