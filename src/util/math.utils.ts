@@ -17,4 +17,8 @@ export namespace MathUtils {
   export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+
+  export function max(arr: number[]) {
+    return arr.reduce((max, n) => Math.max(max, n), -Infinity);
+  }
 }

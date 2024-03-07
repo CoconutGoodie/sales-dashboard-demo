@@ -224,7 +224,7 @@ export namespace RouteUtils {
       });
     }
 
-    const routeObject = {
+    const routeObject: RouteObject = {
       path: routePath.match(/\[.*\]/)
         ? routePath.replace("[", ":").replace("]", "")
         : routePath,

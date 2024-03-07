@@ -5,13 +5,11 @@ import { useResizeObserver } from "usehooks-ts";
 
 import styles from "./SalesActivityWidget.module.scss";
 
-export const SalesActivityWidget = () => {
-  const pseudoData = useMemo(() => {
-    return Array.from({ length: 8 }).map(
-      (_, i) => 50 + Math.random() * 1000 * (i + 1)
-    );
-  }, []);
+interface Props {
+  sales: number[];
+}
 
+export const SalesActivityWidget = (props: Props) => {
   const rootRef = useRef<ComponentRef<"div">>(null);
   const { width: rootWidth = 0, height: rootHeight = 0 } = useResizeObserver({
     ref: rootRef,
@@ -21,20 +19,16 @@ export const SalesActivityWidget = () => {
   const strokeColorId = useId();
   const fillColorId = useId();
 
-  const n2 = pseudoData.at(-2)!;
-  const n1 = pseudoData.at(-1)!;
+  const n2 = props.sales.at(-2)!;
+  const n1 = props.sales.at(-1)!;
   const percentageDifference = 100 * ((n1 - n2) / ((n1 + n2) / 2));
 
-  const total = pseudoData.reduce((sum, data) => sum + data, 0);
+  const total = props.sales.reduce((sum, data) => sum + data, 0);
 
   const vertices = useMemo<MathUtils.Vector2[]>(() => {
-    const maxValue = pseudoData.reduce(
-      (max, data) => Math.max(max, data),
-      -Infinity
-    );
-
-    return pseudoData.map((data, index) => [
-      MathUtils.mapRange(index, [0, pseudoData.length - 1], [0, rootWidth]),
+    const maxValue = MathUtils.max(props.sales);
+    return props.sales.map((data, index) => [
+      MathUtils.mapRange(index, [0, props.sales.length - 1], [0, rootWidth]),
       MathUtils.mapRange(data, [0, maxValue], [0, rootHeight * 0.6]),
     ]);
   }, [rootWidth, rootHeight]);
