@@ -1,0 +1,30 @@
+.widget {
+  --accent: #000;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: var(--accent);
+
+  & > h1 {
+    color: #020617;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+  }
+
+  & > p {
+    color: #020617;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+  }
+}
+
+.button {
+  margin-top: auto;
+  background: var(--accent);
+}

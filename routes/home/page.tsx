@@ -1,26 +1,36 @@
-import { SalesActivityWidget } from "@src/components/widgets/SalesActivityWidget";
-import styles from "./page.module.scss";
+import Wallet01 from "@src/assets/icons/hugeicons/wallet01.svg?component";
+import Diamond02 from "@src/assets/icons/hugeicons/diamond02.svg?component";
 import { Button } from "@src/components/Button";
+import { CtaCardWidget } from "@src/components/widgets/CtaCardWidget";
 import { ExpensesWidget } from "@src/components/widgets/ExpensesWidget";
+import { SalesActivityWidget } from "@src/components/widgets/SalesActivityWidget";
 import { StoreStaticsWidget } from "@src/components/widgets/StoreStaticsWidget";
+
+import styles from "./page.module.scss";
 
 const HomePage = () => {
   return (
     <div className={styles.page}>
       <SalesActivityWidget />
-      <div
-        style={{ background: "#95b4ff", padding: 10, boxSizing: "border-box" }}
-      >
-        <Button>Details</Button>
-        <Button style={{ background: "#7A55B8" }}>Enable</Button>
-        <Button style={{ background: "#E16449" }}>Go Premium</Button>
-      </div>
       <div style={{ background: "#95b4ff" }} />
+      <CtaCardWidget
+        icon={<Wallet01 width={48} height={48} />}
+        title="Wallet Verification"
+        description="Enable 2-step verification to secure your wallet."
+        ctaText="Enable"
+        accentColor="#7A55B8"
+      />
       <StoreStaticsWidget />
       <div style={{ gridRow: "span 2", background: "#95b4ff" }} />
       <ExpensesWidget />
       <div style={{ background: "#95b4ff" }} />
-      <div style={{ background: "#95b4ff" }} />
+      <CtaCardWidget
+        icon={<Diamond02 width={48} height={48} />}
+        title="Go Premium"
+        description={"Receive a 10% discount!\nTap into enhanced capabilities."}
+        ctaText="Go Premium"
+        accentColor="#E16449"
+      />
     </div>
   );
 };
