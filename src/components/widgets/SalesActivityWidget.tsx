@@ -77,7 +77,7 @@ export const SalesActivityWidget = () => {
       </h3>
 
       <svg className={styles.chart}>
-        <g transform="translate(0,300) scale(1,-1)">
+        <g transform={`translate(0,${rootHeight}) scale(1,-1)`}>
           <path
             className={styles.fill}
             d={generatePath(vertices)}
@@ -104,10 +104,10 @@ export const SalesActivityWidget = () => {
           </linearGradient>
           <linearGradient
             id={fillColorId}
-            x1={400 - 203}
+            x1={rootWidth - 203}
             y1={vertices.reduce((max, v) => Math.max(max, v[1]), 0)}
-            x2={400 - 188}
-            y2={200 - 186}
+            x2={rootWidth - 188}
+            y2={rootHeight * 0.65 - 186}
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#0F4EF0" />
