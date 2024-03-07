@@ -14,43 +14,98 @@
     line-height: 29px;
     text-align: start;
   }
+}
 
-  .circle {
-    align-self: center;
-    margin: auto 0;
-    width: fit-content;
-    height: fit-content;
-    display: flex;
+.circle {
+  position: relative;
+  align-self: center;
+  margin: auto 0;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
 
-    & > svg {
-      animation: zoom-in 1s cubic-bezier(0.165, 0.84, 0.44, 1);
-  
-      @keyframes zoom-in {
-        from{
-          scale: 0;
-          rotate: -45deg;
-          opacity: 0;
-        }
-        to{
-          scale: 1;
-          rotate: 0;
-          opacity: 1;
-        }
+  & > svg {
+    animation: zoom-in 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    .arc {
+      transition: stroke-width 80ms linear;
+
+      &:hover {
+        stroke-width: 12px;
+        cursor: help;
+      }
+    }
+
+    @keyframes zoom-in {
+      from {
+        scale: 0;
+        rotate: -45deg;
+        opacity: 0;
+      }
+      to {
+        scale: 1;
+        rotate: 0;
+        opacity: 1;
       }
     }
   }
 
-  .button {
-    margin-top: auto;
-    width: 100%;
+  .info {
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0ddfd;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: fadeIn 1s linear;
+
+    & > :nth-child(1) {
+      margin-bottom: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    & > span:nth-child(2) {
+      color: #020617;
+      text-align: center;
+      font-family: Inter;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 25px;
+    }
+
+    & > span:nth-child(3) {
+      max-width: 70px;
+      color: #020617;
+      opacity: 0.75;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 }
 
-.arc {
-  transition: stroke-width 80ms linear;
-
-  &:hover {
-    stroke-width: 12px;
-    cursor: help;
-  }
+.button {
+  margin-top: auto;
+  width: 100%;
 }

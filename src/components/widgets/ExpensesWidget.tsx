@@ -1,5 +1,5 @@
 import { MathUtils } from "@src/util/math.utils";
-import { ComponentProps, ComponentRef, useMemo, useRef } from "react";
+import { ComponentProps, ComponentRef, useMemo, useRef, useState } from "react";
 
 import styles from "./ExpensesWidget.module.scss";
 import { Button } from "@src/components/Button";
@@ -9,9 +9,9 @@ import { ColorUtils } from "@src/util/color.utils";
 const pseudoData = [
   { label: "Rent", amount: 50 + Math.random() * 1000 },
   { label: "Utilities", amount: 50 + Math.random() * 1000 },
-  { label: "Insurance rates", amount: 50 + Math.random() * 1000 },
-  { label: "Payable interest", amount: 50 + Math.random() * 1000 },
-  { label: "Bank charges", amount: 50 + Math.random() * 1000 },
+  { label: "Insurance", amount: 50 + Math.random() * 1000 },
+  { label: "Interest", amount: 50 + Math.random() * 1000 },
+  { label: "Charges", amount: 50 + Math.random() * 1000 },
   // { label: "Repairs and maintenance", amount: 50 + Math.random() * 1000 },
 ];
 
@@ -29,10 +29,11 @@ export const ExpensesWidget = () => {
 
   const total = pseudoData.reduce((sum, data) => sum + data.amount, 0);
 
-  const sortedExpenses = pseudoData.toSorted((a, b) => b.amount - a.amount);
-
   const expenseEntries = useMemo(() => {
+    const sortedExpenses = pseudoData.toSorted((a, b) => b.amount - a.amount);
+
     const unitAngle = (360 - sortedExpenses.length * gap) / total;
+
     return sortedExpenses
       .map((expense, index) => ({
         ...expense,
@@ -44,7 +45,11 @@ export const ExpensesWidget = () => {
         ),
       }))
       .sort(() => Math.random() - 0.5);
-  }, [sortedExpenses]);
+  }, []);
+
+  const [targetExpense, setTargetExpense] = useState<
+    (typeof expenseEntries)[number]
+  >(expenseEntries.at(-1)!);
 
   let angle = 0;
 
@@ -53,6 +58,12 @@ export const ExpensesWidget = () => {
       <h1>Expenses</h1>
 
       <div ref={circleRef} className={styles.circle}>
+        <div className={styles.info}>
+          <div style={{ background: targetExpense.color }} />
+          <span>{((targetExpense.amount / total) * 100).toFixed(0)}%</span>
+          <span title={targetExpense.label}>{targetExpense.label}</span>
+        </div>
+
         <svg width={140} height={140}>
           <g
             transform={`translate(${width / 2},${height / 2}) rotate(${
@@ -66,10 +77,11 @@ export const ExpensesWidget = () => {
               return (
                 <Arc
                   key={expense.label}
-                  distance={60}
+                  distance={61}
                   fromAngle={fromAngle}
                   toAngle={toAngle}
                   color={expense.color}
+                  onMouseEnter={() => setTargetExpense(expense)}
                 />
               );
             })}
@@ -92,7 +104,6 @@ const Arc = (
     color: string;
   }
 ) => {
-  console.log(props.color);
   const x0 = props.distance * Math.cos(MathUtils.degToRad(props.fromAngle));
   const y0 = props.distance * Math.sin(MathUtils.degToRad(props.fromAngle));
 
