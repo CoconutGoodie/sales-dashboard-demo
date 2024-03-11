@@ -5,9 +5,11 @@ import { ExpensesWidget } from "@src/components/widgets/ExpensesWidget";
 import { SalesActivityWidget } from "@src/components/widgets/SalesActivityWidget";
 import { StoreStaticsWidget } from "@src/components/widgets/StoreStaticsWidget";
 
-import styles from "./page.module.scss";
 import { useLoaderData } from "react-router";
 import { HomeLoaderData } from "./loader";
+
+import styles from "./page.module.scss";
+import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
 
 const HomePage = () => {
   const { sales } = useLoaderData() as HomeLoaderData;
@@ -28,12 +30,13 @@ const HomePage = () => {
 
       <StoreStaticsWidget />
 
-      <div style={{ gridRow: "span 2", background: "#95b4ff" }} />
+      {/* <div style={{ gridRow: "span 2", background: "#95b4ff" }} /> */}
+      <ProductSalesWidget className={styles.rowSpan2} />
 
       <ExpensesWidget />
 
       <div style={{ background: "#95b4ff" }} />
-      
+
       <CtaCardWidget
         icon={<Diamond02 width={48} height={48} />}
         title="Go Premium"

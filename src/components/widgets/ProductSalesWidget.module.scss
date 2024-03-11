@@ -1,0 +1,128 @@
+.widget {
+  box-sizing: border-box;
+  padding: 30px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #020617;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 18px;
+  display: flex;
+
+  h1 {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  & > :nth-child(2) {
+    margin-inline-start: auto;
+    width: 150px;
+    height: 39px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #020617;
+    border-radius: 99999px;
+  }
+}
+
+.tableWrapper {
+  position: relative;
+  overflow-y: scroll;
+  padding-right: 20px;
+  height: 100%;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+
+  :is(th, td):last-child {
+    text-align: end;
+    width: 1%;
+    white-space: nowrap;
+  }
+
+  .thead {
+    position: sticky;
+    top: 0;
+    background: #fff;
+
+    tr {
+      th {
+        padding: 0;
+
+        h1 {
+          border-bottom: 1px solid rgba(#020617, 0.25);
+          padding-bottom: 10px;
+          font-family: Inter;
+          font-size: 16px;
+          font-weight: 400;
+          text-align: start;
+        }
+      }
+    }
+  }
+
+  .tbody {
+    // Gutter between thead and tbody
+    tr:first-child > td > div {
+      margin-top: 20px;
+    }
+
+    // Gap between rows
+    tr:not(:first-child) > td > * {
+      padding-top: 20px;
+    }
+
+    // Gap between columns
+    tr > td:not(:first-child) > * {
+      padding: 0 10px;
+    }
+
+    .titleCell {
+      display: grid;
+      grid-template-areas:
+        "icon title"
+        "icon description";
+      grid-template-columns: auto 1fr;
+      gap: 5px 15px;
+
+      & > :nth-child(1) {
+        grid-area: icon;
+        height: 50px;
+      }
+
+      & > :nth-child(2) {
+        grid-area: title;
+        width: 100%;
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        color: #020617;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      & > :nth-child(3) {
+        grid-area: description;
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        color: rgba(#020617, 0.75);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}
