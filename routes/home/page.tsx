@@ -12,7 +12,7 @@ import styles from "./page.module.scss";
 import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
 
 const HomePage = () => {
-  const { sales } = useLoaderData() as HomeLoaderData;
+  const { sales, productSales } = useLoaderData() as HomeLoaderData;
 
   return (
     <div className={styles.page}>
@@ -30,8 +30,7 @@ const HomePage = () => {
 
       <StoreStaticsWidget />
 
-      {/* <div style={{ gridRow: "span 2", background: "#95b4ff" }} /> */}
-      <ProductSalesWidget className={styles.rowSpan2} />
+      <ProductSalesWidget className={styles.rowSpan2} sales={productSales} />
 
       <ExpensesWidget />
 

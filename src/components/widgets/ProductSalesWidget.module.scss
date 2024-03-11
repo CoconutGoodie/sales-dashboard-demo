@@ -40,13 +40,20 @@
 }
 
 .table {
+  $minColGutter: 25px;
+
   width: 100%;
   border-spacing: 0;
 
-  :is(th, td):last-child {
-    text-align: end;
-    width: 1%;
-    white-space: nowrap;
+  th,
+  td {
+    text-align: start;
+
+    &:last-child {
+      text-align: end;
+      width: 1%;
+      white-space: nowrap;
+    }
   }
 
   .thead {
@@ -54,36 +61,53 @@
     top: 0;
     background: #fff;
 
-    tr {
-      th {
-        padding: 0;
+    // Gap between columns
+    tr > th:not(:last-child) {
+      padding-right: $minColGutter;
+    }
 
-        h1 {
-          border-bottom: 1px solid rgba(#020617, 0.25);
-          padding-bottom: 10px;
-          font-family: Inter;
-          font-size: 16px;
-          font-weight: 400;
-          text-align: start;
-        }
+    tr > th {
+      padding: 0;
+      border-bottom: 1px solid rgba(#020617, 0.25);
+
+      h1 {
+        padding-bottom: 10px;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: start;
       }
     }
   }
 
   .tbody {
-    // Gutter between thead and tbody
-    tr:first-child > td > div {
-      margin-top: 20px;
+    tr > td {
+      padding: 0;
     }
 
-    // Gap between rows
-    tr:not(:first-child) > td > * {
+    // Gutter between thead and tbody
+    tr:first-child > td {
       padding-top: 20px;
     }
 
+    // Gap between rows
+    tr:not(:last-child) > td {
+      padding-bottom: 20px;
+    }
+
     // Gap between columns
-    tr > td:not(:first-child) > * {
-      padding: 0 10px;
+    tr > td:not(:last-child) {
+      padding-right: $minColGutter;
+    }
+
+    tr > td:last-child > .cellWrapper {
+      justify-content: flex-end;
+    }
+
+    .cellWrapper {
+      height: 50px;
+      display: flex;
+      align-items: center;
     }
 
     .titleCell {
@@ -123,6 +147,32 @@
         text-overflow: ellipsis;
         overflow: hidden;
       }
+    }
+
+    .priceCell {
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .ratingCell {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
+
+      & > :first-child {
+        fill: #f7b129;
+        color: #f7b129;
+      }
+    }
+
+    .totalCell {
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 400;
     }
   }
 }
