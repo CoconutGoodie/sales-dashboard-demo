@@ -14,8 +14,28 @@ export namespace MathUtils {
     return degree * DEG_TO_RAD;
   }
 
-  export function randomBetween(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  export function randomFloat(min: number, max: number) {
+    return Math.random() * (max - min + 1) + min;
+  }
+
+  export function randomInt(min: number, max: number) {
+    return Math.floor(randomFloat(min, max));
+  }
+
+  export function sample<T>(arr: T[], n: number = 1): T[] {
+    if (arr.length < n)
+      return [...arr].concat(sample(arr, n - arr.length)).sort(Math.random);
+
+    const pool = [...arr];
+    const samples = [];
+
+    for (let i = 0; i < n; i++) {
+      const index = randomInt(0, pool.length - 1);
+      samples.push(pool[index]);
+      pool.splice(index, 1);
+    }
+
+    return samples;
   }
 
   export function max(arr: number[]) {

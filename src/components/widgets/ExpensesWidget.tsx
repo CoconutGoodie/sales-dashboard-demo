@@ -81,7 +81,9 @@ export const ExpensesWidget = () => {
                   fromAngle={fromAngle}
                   toAngle={toAngle}
                   color={expense.color}
-                  onMouseEnter={() => setTargetExpense(expense)}
+                  wrapperProps={{
+                    onMouseEnter: () => setTargetExpense(expense),
+                  }}
                 />
               );
             })}
@@ -96,14 +98,13 @@ export const ExpensesWidget = () => {
 
 /* -------------------- */
 
-const Arc = (
-  props: ComponentProps<"path"> & {
-    distance: number;
-    fromAngle: number;
-    toAngle: number;
-    color: string;
-  }
-) => {
+const Arc = (props: {
+  distance: number;
+  fromAngle: number;
+  toAngle: number;
+  color: string;
+  wrapperProps: ComponentProps<"path">;
+}) => {
   const x0 = props.distance * Math.cos(MathUtils.degToRad(props.fromAngle));
   const y0 = props.distance * Math.sin(MathUtils.degToRad(props.fromAngle));
 
@@ -114,7 +115,7 @@ const Arc = (
 
   return (
     <path
-      {...props}
+      {...props.wrapperProps}
       className={styles.arc}
       d={`M ${x0} ${y0} A ${props.distance} ${props.distance} 0 ${largeArcFlag} 1 ${x1} ${y1}`}
       stroke={props.color}

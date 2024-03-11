@@ -67,8 +67,14 @@ const columns = [
 
   columnHelper.accessor("totalSales", {
     header: () => <h1>Total Sales</h1>,
-    cell: ({ row, getValue }) => {
-      return <span>{getValue()}</span>;
+    cell: ({ getValue }) => {
+      return (
+        <span className={styles.totalCell}>
+          {new Intl.NumberFormat("en-US", { style: "decimal" }).format(
+            getValue()
+          )}
+        </span>
+      );
     },
   }),
 ];
