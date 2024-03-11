@@ -4,7 +4,7 @@ import strawberrySprinkled from "@src/assets/donuts/strawberry-sprinkled.svg?bas
 import blueberryRound from "@src/assets/donuts/blueberry-round.svg?base64";
 import raspberryFilled from "@src/assets/donuts/raspberry-filled.svg?base64";
 import caramelRound from "@src/assets/donuts/caramel-round.svg?base64";
-import pistachiosRound from "@src/assets/donuts/pistachios-round.svg";
+import pistachiosRound from "@src/assets/donuts/pistachios-round.svg?base64";
 
 function toSvgUri(base64: string) {
   return `data:image/svg+xml;base64,${base64}`;
