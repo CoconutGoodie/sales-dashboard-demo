@@ -84,6 +84,7 @@ export const ProductSalesWidget = (props: Props) => {
   const table = useReactTable<ProductSale>({
     columns,
     data: props.sales,
+    getRowId: (row) => row.title,
     getCoreRowModel: getCoreRowModel(),
   });
 

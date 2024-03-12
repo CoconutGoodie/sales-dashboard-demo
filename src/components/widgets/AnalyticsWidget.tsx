@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties, useMemo } from "react";
 import styles from "./AnalyticsWidget.module.scss";
 import { MathUtils } from "@src/util/math.utils";
 import { ColorUtils } from "@src/util/color.utils";
@@ -7,15 +7,32 @@ interface Props {
   sales: number[];
 }
 
-export const AnalyticsWidget = (props: Props) => {
-  const range = props.sales.reduce<MathUtils.Vector2>(
-    (range, value) => {
-      if (range[0] > value) range[0] = value;
-      if (range[1] < value) range[1] = value;
-      return range;
-    },
-    [Infinity, -Infinity]
+function monthsForLocale(
+  localeName = "en-US",
+  format: Intl.DateTimeFormatOptions["month"]
+) {
+  const dateFormat = new Intl.DateTimeFormat(localeName, { month: format })
+    .format;
+  return [...Array(12).keys()].map((m) =>
+    dateFormat(new Date(Date.UTC(2024, m)))
   );
+}
+
+export const AnalyticsWidget = (props: Props) => {
+  const range = useMemo(
+    () =>
+      props.sales.reduce<MathUtils.Vector2>(
+        (range, value) => {
+          if (range[0] > value) range[0] = value;
+          if (range[1] < value) range[1] = value;
+          return range;
+        },
+        [Infinity, -Infinity]
+      ),
+    [props.sales]
+  );
+
+  const monthLabels = useMemo(() => monthsForLocale("en-GB", "short"), []);
 
   return (
     <div className={styles.widget}>
@@ -25,7 +42,12 @@ export const AnalyticsWidget = (props: Props) => {
 
       <div className={styles.chart}>
         {props.sales.map((value, index) => (
-          <Bar key={index} value={value} range={range} />
+          <Bar
+            key={index}
+            label={monthLabels[index]}
+            value={value}
+            range={range}
+          />
         ))}
       </div>
     </div>
@@ -34,10 +56,14 @@ export const AnalyticsWidget = (props: Props) => {
 
 /* --------------------------------- */
 
-const Bar = (props: { value: number; range: MathUtils.Vector2 }) => {
+const Bar = (props: {
+  label: string;
+  value: number;
+  range: MathUtils.Vector2;
+}) => {
   const maxHeight = 144;
   const minHeight = 24;
-  const minColor = "#c1d1fd";
+  const minColor = "#E3EAFD";
   const maxColor = "#3167F2";
 
   return (
@@ -59,7 +85,7 @@ const Bar = (props: { value: number; range: MathUtils.Vector2 }) => {
     >
       <span>${(props.value / 1000).toFixed()}K</span>
       <div />
-      <span>Jan</span>
+      <span>{props.label}</span>
     </div>
   );
 };
