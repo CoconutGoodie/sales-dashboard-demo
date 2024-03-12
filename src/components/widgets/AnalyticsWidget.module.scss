@@ -27,7 +27,7 @@
   justify-content: space-between;
 
   .bar {
-    --accent: #000;
+    --accent: #e3eafd;
     --height: 0;
     display: flex;
     flex-direction: column;
@@ -48,21 +48,29 @@
       background: var(--accent);
       border-radius: 20px;
       animation: raiseUp 2s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: background 200ms;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(95%);
+      }
 
       @keyframes raiseUp {
         from {
           opacity: 0.2;
           height: 24px;
+          background: #e3eafd;
         }
         to {
           opacity: 1;
           height: var(--height);
+          background: var(--accent);
         }
       }
     }
 
     & > :nth-child(3) {
-      color: #3167F2;
+      color: #3167f2;
       font-family: Inter;
       font-size: 16px;
       font-weight: 500;
