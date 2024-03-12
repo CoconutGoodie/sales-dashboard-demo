@@ -10,15 +10,17 @@ import { HomeLoaderData } from "./loader";
 
 import styles from "./page.module.scss";
 import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
+import { AnalyticsWidget } from "@src/components/widgets/AnalyticsWidget";
 
 const HomePage = () => {
-  const { sales, productSales } = useLoaderData() as HomeLoaderData;
+  const { sales, yearlySales, productSales } =
+    useLoaderData() as HomeLoaderData;
 
   return (
     <div className={styles.page}>
       <SalesActivityWidget sales={sales} />
 
-      <div style={{ background: "#95b4ff" }} />
+      <AnalyticsWidget sales={yearlySales} />
 
       <CtaCardWidget
         icon={<Wallet01 width={48} height={48} />}

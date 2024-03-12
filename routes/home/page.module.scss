@@ -1,5 +1,6 @@
 .page {
-  min-width: 1200px;
+  margin: 0 auto;
+  max-width: 1600px;
   display: grid;
   gap: 25px;
   grid-template-columns: 397px auto 247px;

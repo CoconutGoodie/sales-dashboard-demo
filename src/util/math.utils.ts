@@ -22,9 +22,11 @@ export namespace MathUtils {
     return Math.floor(randomFloat(min, max));
   }
 
-  export function sample<T>(arr: T[], n: number = 1): T[] {
+  export function uniqueSample<T>(arr: T[], n: number = 1): T[] {
     if (arr.length < n)
-      return [...arr].concat(sample(arr, n - arr.length)).sort(Math.random);
+      return [...arr]
+        .concat(uniqueSample(arr, n - arr.length))
+        .sort(Math.random);
 
     const pool = [...arr];
     const samples = [];
@@ -36,6 +38,13 @@ export namespace MathUtils {
     }
 
     return samples;
+  }
+
+  export function guassianRandom(mean: number, stdev: number) {
+    const u = 1 - Math.random();
+    const v = Math.random();
+    const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    return z * stdev + mean;
   }
 
   export function max(arr: number[]) {

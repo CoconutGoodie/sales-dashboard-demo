@@ -13,37 +13,37 @@ function toSvgUri(base64: string) {
 export const DonutPool = [
   {
     icon: toSvgUri(vanillaSprinkled),
-    title: "Vanilla Sprinkled Donut",
+    title: "Vanilla Sprinkled",
     description: "Vanilla cream, sprinkles",
   },
   {
     icon: toSvgUri(doubleChocolate),
-    title: "Double Chocolate Donut",
+    title: "Double Chocolate",
     description: "Chocolate chips, melted chocolate",
   },
   {
     icon: toSvgUri(strawberrySprinkled),
-    title: "Strawberry Sprinkled Donut",
+    title: "Strawberry Sprinkled",
     description: "Strawberry cream, sprinkles, strawberry puree",
   },
   {
     icon: toSvgUri(blueberryRound),
-    title: "Blueberry Round Donut",
+    title: "Blueberry Round",
     description: "Blueberry cream",
   },
   {
     icon: toSvgUri(raspberryFilled),
-    title: "Raspberry Filled Donut",
+    title: "Raspberry Filled",
     description: "Raspberry cream, raspberry puree",
   },
   {
     icon: toSvgUri(caramelRound),
-    title: "Caramel Round Donut",
+    title: "Caramel Round",
     description: "Caramel cream, caramel sauce",
   },
   {
     icon: toSvgUri(pistachiosRound),
-    title: "Pistachios Round Donut",
+    title: "Pistachios Round",
     description: "Pistachios cream, powdered pistachios",
   },
 ];
