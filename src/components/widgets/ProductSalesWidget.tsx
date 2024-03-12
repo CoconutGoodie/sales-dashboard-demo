@@ -9,6 +9,7 @@ import {
 import Star from "@src/assets/icons/hugeicons/star.svg?component";
 
 import styles from "./ProductSalesWidget.module.scss";
+import { CSSProperties } from "react";
 
 interface Props {
   className?: string;
@@ -113,8 +114,8 @@ export const ProductSalesWidget = (props: Props) => {
           </thead>
 
           <tbody className={styles.tbody}>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+            {table.getRowModel().rows.map((row, i) => (
+              <tr key={row.id} style={{ "--index": i } as CSSProperties}>
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id}>
                     <div className={styles.cellWrapper}>

@@ -57,7 +57,7 @@ const Bar = (props: { value: number; range: MathUtils.Vector2 }) => {
         } as CSSProperties
       }
     >
-      <span>${props.value.toFixed()}</span>
+      <span>${(props.value / 1000).toFixed()}K</span>
       <div />
       <span>Jan</span>
     </div>

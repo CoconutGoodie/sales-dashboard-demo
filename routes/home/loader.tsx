@@ -17,8 +17,8 @@ const HomeLoader: LoaderFunction = async () => {
 
     yearlySales: Array.from({ length: 12 }).map((_, i, { length }) =>
       i < length / 2
-        ? 1000 + (2000 * MathUtils.randomFloat(i * 0.3, i + 1)) / length
-        : 2000 - (1000 * MathUtils.randomFloat(i * 0.3, i + 1)) / length
+        ? 1000 + (19000 * MathUtils.randomFloat(i * 0.3, i + 1)) / length
+        : 20000 - (19000 * MathUtils.randomFloat(i * 0.3, i + 1)) / length
     ),
 
     productSales: MathUtils.uniqueSample(

@@ -81,6 +81,25 @@
   }
 
   .tbody {
+    tr {
+      $stagger: 400ms;
+      --index: 0;
+      opacity: 0;
+      animation: fadeIn $stagger forwards;
+      animation-delay: calc($stagger * var(--index) / 8);
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    }
+
     tr > td {
       padding: 0;
     }
