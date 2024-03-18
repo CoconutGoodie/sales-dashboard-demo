@@ -35,8 +35,11 @@
 .tableWrapper {
   position: relative;
   overflow-y: auto;
-  padding-right: 20px;
   height: 100%;
+
+  &.scrollable {
+    padding-right: 20px;
+  }
 }
 
 .table {

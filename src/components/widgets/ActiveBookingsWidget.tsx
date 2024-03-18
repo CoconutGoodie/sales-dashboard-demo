@@ -2,8 +2,9 @@ import ArrowRight01 from "@src/assets/icons/hugeicons/arrow-right01.svg?componen
 
 import styles from "./ActiveBookingsWidget.module.scss";
 import { useScrollbarVisibility } from "@src/hooks/useScrollbarVisibility";
-import { ComponentRef, useRef } from "react";
+import { CSSProperties, ComponentRef, useRef } from "react";
 import clsx from "clsx";
+import { Toggle } from "@src/components/Toggle";
 
 export const ActiveBookingsWidget = () => {
   const containerRef = useRef<ComponentRef<"div">>(null);
@@ -26,9 +27,9 @@ export const ActiveBookingsWidget = () => {
           scrollbarVisible.vertical && styles.scrollable
         )}
       >
-        <BookingCard />
-        <BookingCard />
-        <BookingCard />
+        <BookingCard color="#3167F2" />
+        <BookingCard color="#7DB439" />
+        <BookingCard color="#EF41D6" />
       </div>
     </div>
   );
@@ -36,12 +37,15 @@ export const ActiveBookingsWidget = () => {
 
 // --------
 
-const BookingCard = () => {
+const BookingCard = (props: { color?: string }) => {
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      style={{ "--color": props.color ?? "#000" } as CSSProperties}
+    >
       <h1>Award Ceremony</h1>
       <h2>13:00 - 15:00</h2>
-      <input type="checkbox" />
+      <Toggle checked/>
     </div>
   );
 };

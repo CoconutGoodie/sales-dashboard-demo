@@ -1,0 +1,34 @@
+.wrapper {
+  position: relative;
+  width: 45px;
+  height: 26px;
+  padding: 2px;
+  display: flex;
+  background-color: color-mix(in srgb, currentColor 20%, transparent);
+  color: inherit;
+  border-radius: 999999px;
+  border: none;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+  
+  &:checked + .knob {
+    right: 2px;
+  }
+  
+  &:not(:checked) + knob {
+    left: 2px;
+  }
+}
+
+.knob {
+  position: absolute;
+  top: 2px;
+  height: calc(100% - 4px);
+  aspect-ratio: 1;
+  background: currentColor;
+  color: inherit;
+  border-radius: 50%;
+}

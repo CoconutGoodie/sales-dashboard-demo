@@ -9,7 +9,8 @@ import {
 import Star from "@src/assets/icons/hugeicons/star.svg?component";
 
 import styles from "./ProductSalesWidget.module.scss";
-import { CSSProperties } from "react";
+import { CSSProperties, ComponentRef, useRef } from "react";
+import { useScrollbarVisibility } from "@src/hooks/useScrollbarVisibility";
 
 interface Props {
   className?: string;
@@ -81,6 +82,9 @@ const columns = [
 ];
 
 export const ProductSalesWidget = (props: Props) => {
+  const tableWrapperRef = useRef<ComponentRef<"div">>(null);
+  const scrollbarVisible = useScrollbarVisibility(tableWrapperRef);
+
   const table = useReactTable<ProductSale>({
     columns,
     data: props.sales,
@@ -95,7 +99,13 @@ export const ProductSalesWidget = (props: Props) => {
         <div>TODO: Select</div>
       </div>
 
-      <div className={styles.tableWrapper}>
+      <div
+        ref={tableWrapperRef}
+        className={clsx(
+          styles.tableWrapper,
+          scrollbarVisible.vertical && styles.scrollable
+        )}
+      >
         <table className={styles.table}>
           <thead className={styles.thead}>
             {table.getHeaderGroups().map((headerGroup) => (
