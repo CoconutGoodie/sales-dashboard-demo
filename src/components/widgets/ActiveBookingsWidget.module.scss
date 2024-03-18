@@ -1,0 +1,56 @@
+.widget {
+  box-sizing: border-box;
+  padding: 30px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #020617;
+  overflow: hidden;
+}
+
+.header {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Inter;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.container {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: auto;
+
+  &.scrollable {
+    padding-right: 20px;
+  }
+}
+
+.card {
+  --color: #000;
+  padding: 20px;
+  color: var(--color);
+  background: rgb(from var(--color) r g b / 50%);
+  border-radius: 20px;
+}

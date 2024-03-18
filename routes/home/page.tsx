@@ -11,6 +11,7 @@ import { HomeLoaderData } from "./loader";
 import styles from "./page.module.scss";
 import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
 import { AnalyticsWidget } from "@src/components/widgets/AnalyticsWidget";
+import { ActiveBookingsWidget } from "@src/components/widgets/ActiveBookingsWidget";
 
 const HomePage = () => {
   const { sales, yearlySales, productSales } =
@@ -36,7 +37,7 @@ const HomePage = () => {
 
       <ExpensesWidget />
 
-      <div style={{ background: "#95b4ff" }} />
+      <ActiveBookingsWidget />
 
       <CtaCardWidget
         icon={<Diamond02 width={48} height={48} />}
