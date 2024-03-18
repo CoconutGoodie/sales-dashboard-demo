@@ -1,0 +1,31 @@
+@mixin webkitScrollbar($color) {
+  $track: rgba($color, 0.05);
+  $thumb: rgba($color, 0.3);
+  $hover: rgba($color, 0.5);
+
+  &::-webkit-scrollbar {
+    @content;
+
+    width: 10px;
+    height: 10px;
+
+    &-corner {
+      background: $track;
+      border-end-end-radius: 50%;
+    }
+
+    &-track {
+      background: $track;
+      border-radius: 10px;
+    }
+
+    &-thumb {
+      background: $thumb;
+      border-radius: 10px;
+
+      &:hover {
+        background: darken($hover, 20);
+      }
+    }
+  }
+}

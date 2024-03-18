@@ -10,4 +10,8 @@
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
+
+  &:hover {
+    filter: brightness(90%)
+  }
 }

@@ -11,17 +11,17 @@
   cursor: pointer;
 
   &:hover {
-    outline: 3px solid color-mix(in srgb, currentColor 35%, transparent);
+    outline: 2px solid color-mix(in srgb-linear, transparent, currentColor 35%);
   }
 }
 
 .input {
   display: none;
-  
+
   &:checked + .knob {
     right: 2px;
   }
-  
+
   &:not(:checked) + knob {
     left: 2px;
   }
