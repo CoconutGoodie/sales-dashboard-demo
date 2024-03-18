@@ -54,6 +54,8 @@
   grid-template-areas:
     "title toggle"
     "timeline toggle";
+  grid-template-columns: 1fr auto;
+  align-items: center;
   gap: 0px 10px;
   color: var(--color);
   background: rgb(from var(--color) r g b / 10%);

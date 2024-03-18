@@ -9,6 +9,10 @@
   border-radius: 999999px;
   border: none;
   cursor: pointer;
+
+  &:hover {
+    outline: 3px solid color-mix(in srgb, currentColor 35%, transparent);
+  }
 }
 
 .input {
