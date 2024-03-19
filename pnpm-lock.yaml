@@ -18,8 +18,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0
   react-compound-composer:
-    specifier: ^1.5.0
-    version: 1.5.0
+    specifier: ^1.5.1
+    version: 1.5.1
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -2602,8 +2602,8 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /react-compound-composer@1.5.0:
-    resolution: {integrity: sha512-iFHgQ2Gk/bgde4OkNzvQcg8086pmpbcFrWAHIRhIWc40FOjUvLCXXPlbN7QXXS++glm7Jckr3LtrMXQccnJVAw==}
+  /react-compound-composer@1.5.1:
+    resolution: {integrity: sha512-83UTHYRDd6LZcyajzGfM/hCUhxuX9dUJPCfAh5O5Ij72beSr8OA8KQ1RlEe47TW2e5g+1Xz9ZKMYJZPRCAMpkQ==}
     dependencies:
       react: 18.2.0
     dev: false
