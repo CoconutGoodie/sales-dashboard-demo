@@ -21,16 +21,9 @@
     font-weight: 600;
   }
 
-  & > :nth-child(2) {
+  & .select {
     margin-inline-start: auto;
-    width: 150px;
-    height: 39px;
-    box-sizing: border-box;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #020617;
-    border-radius: 99999px;
+    // width: 150px;
   }
 }
 

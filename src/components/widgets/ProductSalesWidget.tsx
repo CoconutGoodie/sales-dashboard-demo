@@ -9,8 +9,9 @@ import {
 import Star from "@src/assets/icons/hugeicons/star.svg?component";
 
 import styles from "./ProductSalesWidget.module.scss";
-import { CSSProperties, ComponentRef, useRef } from "react";
+import { CSSProperties, ComponentRef, useRef, useState } from "react";
 import { useScrollbarVisibility } from "@src/hooks/useScrollbarVisibility";
+import { Select } from "@src/components/Select";
 
 interface Props {
   className?: string;
@@ -92,11 +93,28 @@ export const ProductSalesWidget = (props: Props) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const [filter, setFilter] = useState<PropertyKey>(0);
+
   return (
     <div className={clsx(props.className, styles.widget)}>
       <div className={styles.header}>
         <h1>Product Sales</h1>
-        <div>TODO: Select</div>
+
+        <Select.Root
+          options={[
+            { value: 0, label: "Last 30 Days" },
+            { value: 1, label: "Last 3 Months" },
+            { value: 2, label: "Last 6 Months" },
+          ]}
+          value={filter}
+          onSelect={(option) => setFilter(option.value)}
+        >
+          <Select.Trigger
+            className={styles.select}
+            renderPlaceholder={() => "No data selected"}
+          />
+          <Select.Popper />
+        </Select.Root>
       </div>
 
       <div

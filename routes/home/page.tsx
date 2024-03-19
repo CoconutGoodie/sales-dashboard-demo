@@ -8,10 +8,10 @@ import { StoreStaticsWidget } from "@src/components/widgets/StoreStaticsWidget";
 import { useLoaderData } from "react-router";
 import { HomeLoaderData } from "./loader";
 
-import styles from "./page.module.scss";
-import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
-import { AnalyticsWidget } from "@src/components/widgets/AnalyticsWidget";
 import { ActiveBookingsWidget } from "@src/components/widgets/ActiveBookingsWidget";
+import { AnalyticsWidget } from "@src/components/widgets/AnalyticsWidget";
+import { ProductSalesWidget } from "@src/components/widgets/ProductSalesWidget";
+import styles from "./page.module.scss";
 
 const HomePage = () => {
   const { sales, yearlySales, productSales } =

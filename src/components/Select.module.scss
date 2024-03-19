@@ -1,0 +1,65 @@
+.root {
+}
+
+.trigger {
+  height: 39px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  background: none;
+  color: #020617;
+  border: 1px solid #020617;
+  border-radius: 99999px;
+  cursor: pointer;
+
+  .text {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .chevron {
+    margin-left: 10px;
+    margin-right: -5px;
+    display: flex;
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  inset: 0;
+  background: rgba(#000, 0.05);
+}
+
+.content {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px 3px rgba(#4c577d, 0.1);
+  overflow: auto;
+}
+
+.option {
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  color: #020617;
+  display: flex;
+  justify-content: flex-start;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+
+  &:hover {
+    background: rgba(#020617, 0.1);
+    cursor: pointer;
+  }
+}
