@@ -1,7 +1,8 @@
-import { CSSProperties, useMemo } from "react";
+import { CSSProperties, useMemo, useState } from "react";
 import styles from "./AnalyticsWidget.module.scss";
 import { MathUtils } from "@src/util/math.utils";
 import { ColorUtils } from "@src/util/color.utils";
+import { Select } from "@src/components/Select";
 
 interface Props {
   sales: number[];
@@ -19,6 +20,8 @@ function monthsForLocale(
 }
 
 export const AnalyticsWidget = (props: Props) => {
+  const [filter, setFilter] = useState<PropertyKey>(0);
+
   const range = useMemo(
     () =>
       props.sales.reduce<MathUtils.Vector2>(
@@ -38,6 +41,22 @@ export const AnalyticsWidget = (props: Props) => {
     <div className={styles.widget}>
       <div className={styles.header}>
         <h1>Analytics</h1>
+
+        <Select.Root
+          options={[
+            { value: 0, label: "2023" },
+            { value: 1, label: "2022" },
+            { value: 2, label: "2021" },
+          ]}
+          value={filter}
+          onSelect={(option) => setFilter(option.value)}
+        >
+          <Select.Trigger
+            className={styles.select}
+            renderPlaceholder={() => "No data selected"}
+          />
+          <Select.Popper />
+        </Select.Root>
       </div>
 
       <div className={styles.chart}>
@@ -61,7 +80,7 @@ const Bar = (props: {
   value: number;
   range: MathUtils.Vector2;
 }) => {
-  const maxHeight = 144;
+  const maxHeight = 130;
   const minHeight = 24;
   const minColor = "#E3EAFD";
   const maxColor = "#3167F2";

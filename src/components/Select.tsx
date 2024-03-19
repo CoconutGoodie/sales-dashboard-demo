@@ -136,7 +136,7 @@ export const Select = compoundBuilder({
               ...context.popper.styles.popper,
               minWidth: context.triggerElement?.clientWidth,
             }}
-            className={styles.content}
+            className={styles.popper}
             {...context.popper.attributes.popper}
           >
             {context.rootProps.options?.map((option) => (

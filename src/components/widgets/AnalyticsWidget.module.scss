@@ -11,6 +11,11 @@
 }
 
 .header {
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   & > h1 {
     color: #020617;
     font-family: Inter;
