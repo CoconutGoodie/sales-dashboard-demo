@@ -52,7 +52,9 @@
 }
 
 .card {
+  $stagger: 600ms;
   --color: #000;
+  --index: 0;
   padding: 20px;
   display: grid;
   grid-template-areas:
@@ -64,6 +66,19 @@
   color: var(--color);
   background: rgb(from var(--color) r g b / 10%);
   border-radius: 20px;
+  animation: fadeIn $stagger forwards;
+  animation-delay: calc($stagger * var(--index) / 8);
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 
   & > h1 {
     grid-area: title;

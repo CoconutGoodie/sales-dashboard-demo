@@ -27,9 +27,9 @@ export const ActiveBookingsWidget = () => {
           scrollbarVisible.vertical && styles.scrollable
         )}
       >
-        <BookingCard color="#3167F2" />
-        <BookingCard color="#7DB439" />
-        <BookingCard color="#EF41D6" />
+        <BookingCard index={0} color="#3167F2" />
+        <BookingCard index={1} color="#7DB439" />
+        <BookingCard index={2} color="#EF41D6" />
       </div>
     </div>
   );
@@ -37,15 +37,20 @@ export const ActiveBookingsWidget = () => {
 
 // --------
 
-const BookingCard = (props: { color?: string }) => {
+const BookingCard = (props: { color?: string; index: number }) => {
   return (
     <div
       className={styles.card}
-      style={{ "--color": props.color ?? "#000" } as CSSProperties}
+      style={
+        {
+          "--color": props.color ?? "#000",
+          "--index": props.index,
+        } as CSSProperties
+      }
     >
       <h1>Award Ceremony</h1>
       <h2>13:00 - 15:00</h2>
-      <Toggle checked/>
+      <Toggle checked />
     </div>
   );
 };
