@@ -1,12 +1,12 @@
-import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react";
+import ArrowRight01 from "@src/assets/icons/hugeicons/arrow-right01.svg?component";
+import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import { compoundBuilder, contextBuilder } from "react-compound-composer";
 import { createPortal } from "react-dom";
 import { Modifier, usePopper } from "react-popper";
 import { useEventListener } from "usehooks-ts";
-import ArrowRight01 from "@src/assets/icons/hugeicons/arrow-right01.svg?component";
 
-import styles from "./Select.module.scss";
 import clsx from "clsx";
+import styles from "./Select.module.scss";
 
 interface SelectOption<
   TValue extends PropertyKey = PropertyKey,

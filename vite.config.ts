@@ -6,6 +6,11 @@ import richSvg from "vite-plugin-react-rich-svg";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), richSvg()],
+  esbuild: {
+    supported: {
+      "top-level-await": true,
+    },
+  },
   resolve: {
     alias: {
       "@src": path.resolve("src"),
