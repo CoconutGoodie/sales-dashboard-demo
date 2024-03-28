@@ -2,13 +2,47 @@ import ArrowRight01 from "@src/assets/icons/hugeicons/arrow-right01.svg?componen
 
 import styles from "./ActiveBookingsWidget.module.scss";
 import { useScrollbarVisibility } from "@src/hooks/useScrollbarVisibility";
-import { CSSProperties, ComponentRef, useRef } from "react";
+import { CSSProperties, ComponentRef, useRef, useState } from "react";
 import clsx from "clsx";
 import { Toggle } from "@src/components/Toggle";
+
+interface Booking {
+  title: string;
+  timeline: string;
+  color: string;
+}
 
 export const ActiveBookingsWidget = () => {
   const containerRef = useRef<ComponentRef<"div">>(null);
   const scrollbarVisible = useScrollbarVisibility(containerRef);
+
+  const [bookings, setBookings] = useState<Booking[]>([
+    {
+      title: "Daily Scrum",
+      timeline: "08:30 - 09:00",
+      color: "#3167F2",
+    },
+    {
+      title: "Recruitment Interview",
+      timeline: "10:00 - 11:00",
+      color: "#7DB439",
+    },
+    {
+      title: "Award Ceremony",
+      timeline: "13:00 - 15:15",
+      color: "#7A55B8",
+    },
+    {
+      title: "Flavor Discussion",
+      timeline: "16:30 - 18:00",
+      color: "#E16449",
+    },
+    {
+      title: "Report Evaluations",
+      timeline: "18:30 - 20:00",
+      color: "#EF41D6",
+    },
+  ]);
 
   return (
     <div className={styles.widget}>
@@ -27,9 +61,20 @@ export const ActiveBookingsWidget = () => {
           scrollbarVisible.vertical && styles.scrollable
         )}
       >
-        <BookingCard index={0} color="#3167F2" />
-        <BookingCard index={1} color="#7DB439" />
-        <BookingCard index={2} color="#EF41D6" />
+        {bookings.length === 0 && <div>EMPTY</div>}
+
+        {bookings.map((booking, i) => (
+          <BookingCard
+            key={booking.title}
+            index={i}
+            booking={booking}
+            onRemove={() =>
+              setBookings((bookings) => {
+                return bookings.filter((b) => b !== booking);
+              })
+            }
+          />
+        ))}
       </div>
     </div>
   );
@@ -37,20 +82,35 @@ export const ActiveBookingsWidget = () => {
 
 // --------
 
-const BookingCard = (props: { color?: string; index: number }) => {
+const BookingCard = (props: {
+  index: number;
+  booking: Booking;
+  onRemove?: () => void;
+}) => {
+  const [checked, setChecked] = useState(true);
+
   return (
     <div
-      className={styles.card}
+      className={clsx(styles.card, !checked && styles.removing)}
       style={
         {
-          "--color": props.color ?? "#000",
           "--index": props.index,
+          "--color": props.booking.color ?? "#000",
         } as CSSProperties
       }
+      onAnimationEnd={(e) => {
+        if (e.animationName === styles.fadeOut) {
+          props.onRemove?.();
+        }
+      }}
     >
-      <h1>Award Ceremony</h1>
-      <h2>13:00 - 15:00</h2>
-      <Toggle checked />
+      <h1>{props.booking.title}</h1>
+      <h2>{props.booking.timeline}</h2>
+      <Toggle
+        disabled={!checked}
+        checked={checked}
+        onCheckedChange={setChecked}
+      />
     </div>
   );
 };

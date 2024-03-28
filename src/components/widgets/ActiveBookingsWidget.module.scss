@@ -69,6 +69,10 @@
   animation: fadeIn $stagger forwards;
   animation-delay: calc($stagger * var(--index) / 8);
 
+  &.removing {
+    animation: fadeOut 400ms forwards;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -77,6 +81,17 @@
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      margin-top: 0;
+    }
+    to {
+      opacity: 0;
+      margin-top: -100px;
     }
   }
 

@@ -5,23 +5,23 @@ import styles from "./Toggle.module.scss";
 
 type Props = ComponentProps<"button"> & {
   checked: boolean;
-  onChange?: (checked: boolean) => void;
+  onCheckedChange?: (checked: boolean) => void;
 };
 
 export const Toggle = (props: Props) => {
-  const { checked, onChange, ...wrapperProps } = props;
+  const { checked, onCheckedChange, ...wrapperProps } = props;
 
   return (
     <button
       {...wrapperProps}
       className={clsx(wrapperProps.className, styles.wrapper)}
-      onClick={() => onChange?.(!checked)}
+      onClick={() => onCheckedChange?.(!checked)}
     >
       <input
         type="checkbox"
         className={styles.input}
         checked={checked}
-        onChange={(e) => onChange?.(e.target.checked)}
+        onChange={(e) => onCheckedChange?.(e.target.checked)}
       />
       <div className={styles.knob} />
     </button>
