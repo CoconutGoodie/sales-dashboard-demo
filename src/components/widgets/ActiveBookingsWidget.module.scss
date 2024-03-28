@@ -38,6 +38,7 @@
 }
 
 .container {
+  flex-grow: 1;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -49,6 +50,30 @@
   }
 
   @include webkitScrollbar(#020617);
+}
+
+.blankslate {
+  margin: auto 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+
+  & > :nth-child(1) {
+    flex-shrink: 0;
+    opacity: 0.5;
+    color: #020617;
+  }
+
+  & > :nth-child(2) {
+    flex-shrink: 0;
+    width: 187px;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(#020617, 0.75);
+  }
 }
 
 .card {
@@ -70,7 +95,7 @@
   animation-delay: calc($stagger * var(--index) / 8);
 
   &.removing {
-    animation: fadeOut 400ms forwards;
+    animation: fadeOut 800ms forwards;
   }
 
   @keyframes fadeIn {
@@ -91,7 +116,7 @@
     }
     to {
       opacity: 0;
-      margin-top: -100px;
+      margin-top: -112px;
     }
   }
 

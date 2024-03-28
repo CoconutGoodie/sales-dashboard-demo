@@ -1,4 +1,5 @@
 import ArrowRight01 from "@src/assets/icons/hugeicons/arrow-right01.svg?component";
+import CalendarBlock02 from "@src/assets/icons/hugeicons/calendar-block02.svg?component";
 
 import styles from "./ActiveBookingsWidget.module.scss";
 import { useScrollbarVisibility } from "@src/hooks/useScrollbarVisibility";
@@ -61,7 +62,12 @@ export const ActiveBookingsWidget = () => {
           scrollbarVisible.vertical && styles.scrollable
         )}
       >
-        {bookings.length === 0 && <div>EMPTY</div>}
+        {bookings.length === 0 && (
+          <div className={styles.blankslate}>
+            <CalendarBlock02 width={64} height={64} />
+            <span>There is no active booking.</span>
+          </div>
+        )}
 
         {bookings.map((booking, i) => (
           <BookingCard
