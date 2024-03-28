@@ -1,0 +1,44 @@
+.root {
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #131931;
+  color: #a7b0d1;
+  border-radius: 20px;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.input {
+  width: 180px;
+  height: 100%;
+  border: none;
+  background: none;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  transition: width 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &::placeholder {
+    color: #a7b0d1;
+  }
+
+  &::-webkit-search-cancel-button {
+    // display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus,
+  &.nonEmpty {
+    width: 250px;
+  }
+}

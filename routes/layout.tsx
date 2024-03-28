@@ -16,6 +16,7 @@ import { clsx } from "clsx";
 
 import styles from "./layout.module.scss";
 import "./style.scss";
+import { GlobalSearch } from "@src/components/GlobalSearch";
 
 const RootLayout = () => {
   return (
@@ -56,7 +57,9 @@ const RootLayout = () => {
         </nav>
       </aside>
 
-      <header className={styles.header}></header>
+      <header className={styles.header}>
+        <GlobalSearch />
+      </header>
 
       <div className={styles.page}>
         <Outlet />
