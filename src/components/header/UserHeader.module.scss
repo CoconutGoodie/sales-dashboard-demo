@@ -1,0 +1,65 @@
+.header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.nav {
+  display: flex;
+  gap: 50px;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  color: #7d849f;
+
+  &.badge {
+    color: #fff;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      right: -7px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #3167f2;
+    }
+  }
+}
+
+.userCard {
+  display: grid;
+  grid-template-areas:
+    "photo fullname"
+    "photo title";
+  gap: 0 15px;
+  cursor: pointer;
+  text-decoration: none;
+
+  & > img {
+    grid-area: photo;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  & > h1 {
+    grid-area: fullname;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  & > h2 {
+    grid-area: title;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    color: #a7b0d1;
+  }
+}

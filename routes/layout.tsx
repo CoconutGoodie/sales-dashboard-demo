@@ -8,6 +8,7 @@ import Attachment01 from "@src/assets/icons/hugeicons/attachment01.svg?component
 import UserGroup from "@src/assets/icons/hugeicons/user-group.svg?component";
 import Favourite from "@src/assets/icons/hugeicons/favourite.svg?component";
 import Bookmark02 from "@src/assets/icons/hugeicons/bookmark02.svg?component";
+import { GlobalSearch } from "@src/components/header/GlobalSearch";
 
 import { PropsWithChildren } from "react";
 import { Outlet, useLocation } from "react-router";
@@ -16,7 +17,7 @@ import { clsx } from "clsx";
 
 import styles from "./layout.module.scss";
 import "./style.scss";
-import { GlobalSearch } from "@src/components/GlobalSearch";
+import { UserHeader } from "@src/components/header/UserHeader";
 
 const RootLayout = () => {
   return (
@@ -59,6 +60,7 @@ const RootLayout = () => {
 
       <header className={styles.header}>
         <GlobalSearch />
+        <UserHeader />
       </header>
 
       <div className={styles.page}>
