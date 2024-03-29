@@ -35,11 +35,13 @@
 }
 
 .popper {
-  padding: 10px 0;
+  padding: 4px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
   background: #fff;
   border-radius: 12px;
+  border: 1px solid #020617;
   box-shadow: 0 0 20px 3px rgba(#4c577d, 0.1);
   overflow: auto;
 
@@ -50,6 +52,7 @@
     color: #020617;
     display: flex;
     justify-content: flex-start;
+    border-radius: 8px;
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
