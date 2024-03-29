@@ -29,3 +29,7 @@
     <img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DiGoodie%26type%3Dpatrons"/>
   </a>
 </p>
+
+<a href="">
+  <img src="https://github.com/CoconutGoodie/sales-dashboard-demo/assets/8591785/938f86c5-1f13-411e-a94f-3d4114d73ad4" alt="Figma Cover"/>
+</a>
